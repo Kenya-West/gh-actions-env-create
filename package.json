@@ -1,0 +1,36 @@
+{
+  "name": "gh-actions-env-create",
+  "version": "1.0.0",
+  "description": "Automates initial create/update envs for GitHub Actions",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kenya-West/gh-actions-env-create.git"
+  },
+  "keywords": [
+    "GitHub",
+    "GitHub",
+    "Actions",
+    "GitHub",
+    "API",
+    "CI/CD",
+    "CI",
+    "CD"
+  ],
+  "author": "Kenya-West",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kenya-West/gh-actions-env-create/issues"
+  },
+  "homepage": "https://github.com/Kenya-West/gh-actions-env-create#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "libsodium-wrappers": "^0.7.15",
+    "octokit": "^4.0.2",
+    "yargs": "^17.7.2"
+  }
+}
