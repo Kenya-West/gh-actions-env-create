@@ -5,6 +5,7 @@ import { config as dotEnvConfig } from 'dotenv';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import fs from 'fs';
+import { getCustomEnvs } from './custom-envs.js';
 
 const sodium = libSodiumWrappers;
 
@@ -66,6 +67,13 @@ arrSecretsDotEnv.push([
   ).toString('base64'),
 ]);
 
+// Get custom env files and create secrets
+const customEnvs = getCustomEnvs(projectPath);
+const arrCustomEnvSecrets = customEnvs.map(({ fileName, secretName }) => {
+  const content = fs.readFileSync(fileName, 'utf8');
+  return [secretName, Buffer.from(content).toString('base64')];
+});
+
 // Oktakit.
 const octokit = new Octokit({
   auth: GITHUB_TOKEN,
@@ -117,3 +125,4 @@ async function pushSecrets(arr) {
 
 await pushSecrets(arrSecretsGhActions);
 await pushSecrets(arrSecretsDotEnv);
+await pushSecrets(arrCustomEnvSecrets);

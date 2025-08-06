@@ -61,7 +61,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-The reason this repository exist is a had to repeatedly create typical secrets with the same keys again and again, and decided to automate it with Node.
+The reason this repository exist is that I had to repeatedly create typical secrets with the same keys again and again, and decided to automate it with Node.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -118,6 +118,26 @@ Is recommended:
     Successfully set secret: DOCKERHUB_REPONAME
     Successfully set secret: ENV_CONTENT
     ```
+
+## Usage in CI/CD
+
+After variables and secret have been populated in GitHub repo, you can use them in your CI/CD pipeline. An example is set in [`.github-example/workflows/ci.yml`](.github-example/workflows/ci.yml).
+
+### Advanced usage with custom file creation
+
+You can also create custom files in the destination machine:
+
+1. Create a file named `.env.PROJECTFILES_<ANY NAME>`, e. g. `.env.PROJECTFILES_PADSJSON` or just `.env.PROJECTFILES_PADS`;
+2. Inside the file, set necessary content that you want to be created in the destination machine;
+3. To create the file in the target machine, use the following line in `ci.yml` file:
+
+   ```yaml
+   - name: Create custom file
+     run: echo "${{ secrets.PROJECTFILES_PADS }}" | base64 --decode > ./pads.json
+   ```
+   This will create a file named `pads.json` in the root of the project directory, containing the content from `.env.PROJECTFILES_PADS`.
+
+Full example is available in [`.github-example/workflows/ci-custom-files.yml`](.github-example/workflows/ci-custom-files.yml).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

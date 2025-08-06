@@ -1,0 +1,42 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v2
+    
+      - name: Create file from secret (base)
+        run: echo "${{ secrets.PROJECTFILES_PADSJSON }}" | base64 --decode > pads.json
+      - name: Create file from secret (dev)
+        run: echo "${{ secrets.PROJECTFILES_PADSDEVJSON }}" | base64 --decode > pads.dev.json
+      - name: Create file from secret (prod)
+        run: echo "${{ secrets.PROJECTFILES_PADSPRODJSON }}" | base64 --decode > pads.prod.json
+      
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      
+      - name: Build and push Docker image
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPONAME }}:latest .
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPONAME }}:latest
+      
+      - name: Deploy to VPS
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_IP }}
+          username: ${{ secrets.VPS_USERNAME }}
+          key: ${{ secrets.SSH_PRIVATEKEY }}
+          script: |
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPONAME }}:latest
+            cd ${{ secrets.PROJECT_DIRNAME }}
+            docker compose up ${{ secrets.PROJECT_DOCKERCONTAINERNAME }} -d --build
