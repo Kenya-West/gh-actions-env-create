@@ -1,13 +1,4 @@
 <!-- Based on https://github.com/othneildrew/Best-README-Template -->
-<a id="readme-top"></a>
-
-<!-- PROJECT SHIELDS -->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
 
 <!-- PROJECT LOGO -->
 <br />
@@ -28,7 +19,25 @@
   </p>
 </div>
 
+<a id="readme-top"></a>
 
+<!-- PROJECT SHIELDS -->
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
+
+<div align="center">
+
+[![JavaScript](https://img.shields.io/badge/javascript-black?style=flat&logo=javascript&logoColor=white)](https://github.com/tc39)
+[![DotEnv](https://img.shields.io/badge/dotenv-black?style=flat&logo=dotenv&logoColor=white)]()
+
+[![Telegram](https://img.shields.io/badge/Telegram-black?style=flat&logo=Telegram&logoColor=26A5E4)](https://t.me/kenyawestdev/4)
+[![License](https://img.shields.io/badge/license-MIT-black?style=flat)](https://opensource.org/licenses/MIT)
+
+</div>
 
 <!-- TABLE OF CONTENTS -->
 <details>
